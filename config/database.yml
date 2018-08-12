@@ -1,0 +1,21 @@
+defaults: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  username: postgres
+  password: postgrespass
+
+development:
+  <<: *default
+  database: shortned_url_development
+
+test:
+  <<: *default
+  database: shortned_url_test
+
+production:
+  <<: *default
+  database: shortned_url_production
+  username: shortned_url
+  password: <%= ENV['SHORTNED_URL_DATABASE_PASSWORD'] %>

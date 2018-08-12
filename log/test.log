@@ -1,0 +1,1027 @@
+  [1m[35m (299.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (79.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7903274804717601330);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateShortUrls (20171124115132)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (118.1ms)[0m  [1m[35mCREATE TABLE "short_urls" ("id" serial primary key, "original_url" text, "short_url" character varying, "sanitize_url" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171124115132"]]
+  [1m[35m (17.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2017-11-27 12:35:06.605393"], ["updated_at", "2017-11-27 12:35:06.605393"]]
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(7903274804717601330)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"original_url"=>"http://github.com"}
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 10.0ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"original_url"=>"not url"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"original_url"=>"http://github.com"}
+Completed 500 Internal Server Error in 86118ms (ActiveRecord: 11.6ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"original_url"=>"not url"}
+Completed 500 Internal Server Error in 680ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"original_url"=>"http://github.com"}
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 10.9ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"original_url"=>"not url"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"http://github.com"}}
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "b9xqk1"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "b9xqk1"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 12:50:04.222891"], ["updated_at", "2017-11-27 12:50:04.222891"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/short_urls/1
+Completed 302 Found in 73ms (ActiveRecord: 10.6ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"not url"}}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://not url"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://test.host/
+Completed 302 Found in 9ms (ActiveRecord: 1.7ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"http://github.com"}}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "9rsodw"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "9rsodw"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 12:51:03.798095"], ["updated_at", "2017-11-27 12:51:03.798095"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/short_urls/2
+Completed 302 Found in 16728ms (ActiveRecord: 11.0ms)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"not url"}}
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://not url"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://test.host/
+Completed 302 Found in 35679ms (ActiveRecord: 1.7ms)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"http://github.com"}}
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "6wxhl0"], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "6wxhl0"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 12:52:31.359369"], ["updated_at", "2017-11-27 12:52:31.359369"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/short_urls/3
+Completed 302 Found in 72ms (ActiveRecord: 14.6ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"not url"}}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://not url"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://test.host/
+Completed 302 Found in 7ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "pwazyj"], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "pwazyj"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 12:56:53.337624"], ["updated_at", "2017-11-27 12:56:53.337624"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "2wenfz"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "2wenfz"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 12:56:53.392167"], ["updated_at", "2017-11-27 12:56:53.392167"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "lp9156"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "lp9156"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:04:25.513442"], ["updated_at", "2017-11-27 13:04:25.513442"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "4zigyn"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "4zigyn"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:04:25.545733"], ["updated_at", "2017-11-27 13:04:25.545733"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "qoetzy"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "qoetzy"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:04:25.565742"], ["updated_at", "2017-11-27 13:04:25.565742"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (1.2ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "zt5sd7"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "zt5sd7"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:06:10.247561"], ["updated_at", "2017-11-27 13:06:10.247561"]]
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "9cp4e7"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "9cp4e7"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:06:10.279910"], ["updated_at", "2017-11-27 13:06:10.279910"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "e1arsd"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "e1arsd"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:06:10.297959"], ["updated_at", "2017-11-27 13:06:10.297959"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "091vwg"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "091vwg"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:14:02.859195"], ["updated_at", "2017-11-27 13:14:02.859195"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "pilftb"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "pilftb"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:15:58.504121"], ["updated_at", "2017-11-27 13:15:58.504121"]]
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "loa5g1"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "loa5g1"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:15:58.528419"], ["updated_at", "2017-11-27 13:15:58.528419"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"http://github.com"}}
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "9bhcxu"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "9bhcxu"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:16:29.925252"], ["updated_at", "2017-11-27 13:16:29.925252"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/short_urls/15
+Completed 302 Found in 67ms (ActiveRecord: 13.2ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"not url"}}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://not url"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://test.host/
+Completed 302 Found in 7ms (ActiveRecord: 1.0ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "kpzybv"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "kpzybv"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:16:57.191781"], ["updated_at", "2017-11-27 13:16:57.191781"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "dy97sm"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "dy97sm"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:16:57.203957"], ["updated_at", "2017-11-27 13:16:57.203957"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "q2opjc"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "q2opjc"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:16:57.219857"], ["updated_at", "2017-11-27 13:16:57.219857"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "2jhfes"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "2jhfes"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:16:57.240502"], ["updated_at", "2017-11-27 13:16:57.240502"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "kv614t"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "kv614t"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:16:57.253530"], ["updated_at", "2017-11-27 13:16:57.253530"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mShortUrl Load (0.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"http://github.com"}}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "vf3x7t"], ["LIMIT", 1]]
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "vf3x7t"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:19:13.918849"], ["updated_at", "2017-11-27 13:19:13.918849"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/short_urls/21
+Completed 302 Found in 12022ms (ActiveRecord: 15.5ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"short_url"=>{"original_url"=>"not url"}}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://not url"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://test.host/
+Completed 302 Found in 671ms (ActiveRecord: 1.3ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:32:59 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (19.3ms)
+Completed 200 OK in 4469ms (Views: 4423.9ms | ActiveRecord: 8.4ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:33:04 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.3ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "foiug2"], ["LIMIT", 1]]
+  [1m[35mSQL (23.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "foiug2"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:33:04.136834"], ["updated_at", "2017-11-27 13:33:04.136834"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/22
+Completed 302 Found in 56ms (ActiveRecord: 26.5ms)
+Started GET "/short_urls/22" for 127.0.0.1 at 2017-11-27 15:33:04 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"22"}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (7.6ms)
+Completed 200 OK in 35ms (Views: 28.7ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:36:34 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (43.7ms)
+Completed 200 OK in 570ms (Views: 517.5ms | ActiveRecord: 11.6ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:36:35 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.6ms)
+Completed 200 OK in 28ms (Views: 26.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:36:51 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (40.3ms)
+Completed 200 OK in 583ms (Views: 531.0ms | ActiveRecord: 12.3ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:36:52 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (6.7ms)
+Completed 200 OK in 33ms (Views: 31.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:37:17 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (87.3ms)
+Completed 200 OK in 532ms (Views: 464.8ms | ActiveRecord: 11.7ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:37:17 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "2h7kp0"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "2h7kp0"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:37:17.943090"], ["updated_at", "2017-11-27 13:37:17.943090"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/23
+Completed 302 Found in 22ms (ActiveRecord: 4.9ms)
+Started GET "/short_urls/23" for 127.0.0.1 at 2017-11-27 15:37:17 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"23"}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (9.0ms)
+Completed 200 OK in 40ms (Views: 33.3ms | ActiveRecord: 0.5ms)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:37:18 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (6.5ms)
+Completed 200 OK in 30ms (Views: 27.4ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:37:18 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "c7bzyw"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "c7bzyw"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:37:18.056047"], ["updated_at", "2017-11-27 13:37:18.056047"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/24
+Completed 302 Found in 10ms (ActiveRecord: 2.5ms)
+Started GET "/short_urls/24" for 127.0.0.1 at 2017-11-27 15:37:18 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"24"}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (7.5ms)
+Completed 200 OK in 84ms (Views: 80.1ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "ebaj7d"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "ebaj7d"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:37:18.156087"], ["updated_at", "2017-11-27 13:37:18.156087"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:43:48 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (29.8ms)
+Completed 200 OK in 573ms (Views: 524.1ms | ActiveRecord: 9.3ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "hmluw3"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "hmluw3"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:43:49.420928"], ["updated_at", "2017-11-27 13:43:49.420928"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/26
+Completed 302 Found in 19ms (ActiveRecord: 4.1ms)
+Started GET "/short_urls/26" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"26"}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (6.8ms)
+Completed 200 OK in 32ms (Views: 26.2ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.8ms)
+Completed 200 OK in 28ms (Views: 25.6ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "c32jzg"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "c32jzg"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:43:49.519452"], ["updated_at", "2017-11-27 13:43:49.519452"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/27
+Completed 302 Found in 10ms (ActiveRecord: 2.6ms)
+Started GET "/short_urls/27" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"27"}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (6.5ms)
+Completed 200 OK in 29ms (Views: 25.7ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "shjtg9"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "shjtg9"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:43:49.563333"], ["updated_at", "2017-11-27 13:43:49.563333"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (6.7ms)
+Completed 200 OK in 32ms (Views: 29.4ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"wrong url"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://wrong url"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 36ms (ActiveRecord: 1.0ms)
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:43:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (4.9ms)
+Completed 200 OK in 25ms (Views: 22.6ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:12 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (29.4ms)
+Completed 200 OK in 529ms (Views: 482.2ms | ActiveRecord: 10.5ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:44:12 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "f18o9m"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "f18o9m"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:44:12.922609"], ["updated_at", "2017-11-27 13:44:12.922609"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/29
+Completed 302 Found in 71ms (ActiveRecord: 4.5ms)
+Started GET "/short_urls/29" for 127.0.0.1 at 2017-11-27 15:44:12 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"29"}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (8.7ms)
+Completed 200 OK in 41ms (Views: 35.9ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:12 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (7.5ms)
+Completed 200 OK in 36ms (Views: 33.3ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:44:13 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "we9zvm"], ["LIMIT", 1]]
+  [1m[35mSQL (14.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "we9zvm"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:44:13.043260"], ["updated_at", "2017-11-27 13:44:13.043260"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/30
+Completed 302 Found in 26ms (ActiveRecord: 16.1ms)
+Started GET "/short_urls/30" for 127.0.0.1 at 2017-11-27 15:44:13 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"30"}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (6.6ms)
+Completed 200 OK in 31ms (Views: 26.2ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "jrm63v"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "jrm63v"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:44:13.107458"], ["updated_at", "2017-11-27 13:44:13.107458"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:13 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.5ms)
+Completed 200 OK in 30ms (Views: 27.0ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:44:13 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"wrong url"}, "button"=>""}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://wrong url"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 1.2ms)
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:13 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.1ms)
+Completed 200 OK in 27ms (Views: 24.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:46 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (39.4ms)
+Completed 200 OK in 662ms (Views: 617.6ms | ActiveRecord: 7.4ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (2.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "orgn9d"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "orgn9d"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:44:47.360169"], ["updated_at", "2017-11-27 13:44:47.360169"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/32
+Completed 302 Found in 23ms (ActiveRecord: 5.5ms)
+Started GET "/short_urls/32" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"32"}
+  [1m[36mShortUrl Load (0.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 32], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (8.4ms)
+Completed 200 OK in 48ms (Views: 41.9ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (7.4ms)
+Completed 200 OK in 36ms (Views: 33.6ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "bjqx9r"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "bjqx9r"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:44:47.481566"], ["updated_at", "2017-11-27 13:44:47.481566"]]
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/short_urls/33
+Completed 302 Found in 6ms (ActiveRecord: 0.7ms)
+Started GET "/short_urls/33" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"33"}
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 33], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (8.3ms)
+Completed 200 OK in 37ms (Views: 31.7ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (7.5ms)
+Completed 200 OK in 38ms (Views: 35.5ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"wrong url"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://wrong url"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 8ms (ActiveRecord: 1.4ms)
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:44:47 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (6.8ms)
+Completed 200 OK in 31ms (Views: 29.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:45:25 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (45.4ms)
+Completed 200 OK in 583ms (Views: 533.0ms | ActiveRecord: 10.8ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.3ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "qxgoze"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "qxgoze"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:45:26.317672"], ["updated_at", "2017-11-27 13:45:26.317672"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/34
+Completed 302 Found in 20ms (ActiveRecord: 4.6ms)
+Started GET "/short_urls/34" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"34"}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 34], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (8.5ms)
+Completed 200 OK in 88ms (Views: 82.1ms | ActiveRecord: 0.5ms)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (7.1ms)
+Completed 200 OK in 37ms (Views: 35.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "clg162"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "clg162"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:45:26.475568"], ["updated_at", "2017-11-27 13:45:26.475568"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/short_urls/35
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+Started GET "/short_urls/35" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"35"}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (9.9ms)
+Completed 200 OK in 43ms (Views: 37.8ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (7.7ms)
+Completed 200 OK in 43ms (Views: 40.2ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"wrong url"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://wrong url"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 12ms (ActiveRecord: 1.5ms)
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:45:26 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (12.9ms)
+Completed 200 OK in 71ms (Views: 68.9ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "8reyng"], ["LIMIT", 1]]
+  [1m[35mSQL (1.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "8reyng"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:45:26.729242"], ["updated_at", "2017-11-27 13:45:26.729242"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "gl6epy"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "gl6epy"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:45:26.752536"], ["updated_at", "2017-11-27 13:45:26.752536"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "nl59xc"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "nl59xc"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:45:26.770219"], ["updated_at", "2017-11-27 13:45:26.770219"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "5ytl7b"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "5ytl7b"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:45:26.802517"], ["updated_at", "2017-11-27 13:45:26.802517"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "dcw0k5"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "dcw0k5"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:45:26.821312"], ["updated_at", "2017-11-27 13:45:26.821312"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:49:48 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (30.1ms)
+Completed 200 OK in 596ms (Views: 548.9ms | ActiveRecord: 12.1ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.2ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "d9hwle"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "d9hwle"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:49:49.136478"], ["updated_at", "2017-11-27 13:49:49.136478"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/41
+Completed 302 Found in 18ms (ActiveRecord: 3.9ms)
+Started GET "/short_urls/41" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"41"}
+  [1m[36mShortUrl Load (0.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 41], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (7.3ms)
+Completed 200 OK in 32ms (Views: 27.1ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.5ms)
+Completed 200 OK in 29ms (Views: 25.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "txpqdr"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "txpqdr"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:49:49.228421"], ["updated_at", "2017-11-27 13:49:49.228421"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/short_urls/42
+Completed 302 Found in 5ms (ActiveRecord: 0.7ms)
+Started GET "/short_urls/42" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"42"}
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (7.4ms)
+Completed 200 OK in 32ms (Views: 28.1ms | ActiveRecord: 0.9ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (6.0ms)
+Completed 200 OK in 28ms (Views: 26.1ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"wrong url"}, "button"=>""}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://wrong url"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 1.1ms)
+Started GET "/" for 127.0.0.1 at 2017-11-27 15:49:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.1ms)
+Completed 200 OK in 27ms (Views: 24.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "8w0j71"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "8w0j71"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:49:49.380763"], ["updated_at", "2017-11-27 13:49:49.380763"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "fyurzj"], ["LIMIT", 1]]
+  [1m[35mSQL (16.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "fyurzj"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:49:49.392403"], ["updated_at", "2017-11-27 13:49:49.392403"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "ohw5g1"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "ohw5g1"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:49:49.424266"], ["updated_at", "2017-11-27 13:49:49.424266"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "l9j1ok"], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "l9j1ok"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:49:49.451157"], ["updated_at", "2017-11-27 13:49:49.451157"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "yxho6n"], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "yxho6n"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 13:49:49.470570"], ["updated_at", "2017-11-27 13:49:49.470570"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (30.8ms)
+Completed 200 OK in 527ms (Views: 488.4ms | ActiveRecord: 9.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (2.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "xip2sv"], ["LIMIT", 1]]
+  [1m[35mSQL (10.7ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "xip2sv"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:02:49.644053"], ["updated_at", "2017-11-27 14:02:49.644053"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/48
+Completed 302 Found in 32ms (ActiveRecord: 14.6ms)
+Started GET "/short_urls/48" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"48"}
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (8.8ms)
+Completed 200 OK in 40ms (Views: 31.0ms | ActiveRecord: 0.9ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (6.3ms)
+Completed 200 OK in 29ms (Views: 26.6ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "al5miv"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "al5miv"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:02:49.757367"], ["updated_at", "2017-11-27 14:02:49.757367"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/short_urls/49
+Completed 302 Found in 4ms (ActiveRecord: 0.6ms)
+Started GET "/short_urls/49" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"49"}
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 49], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (7.1ms)
+Completed 200 OK in 31ms (Views: 27.1ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.5ms)
+Completed 200 OK in 28ms (Views: 26.5ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"wrong url"}, "button"=>""}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://wrong url"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 7ms (ActiveRecord: 1.1ms)
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:02:49 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.3ms)
+Completed 200 OK in 28ms (Views: 25.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "p2f87m"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "p2f87m"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:02:49.910409"], ["updated_at", "2017-11-27 14:02:49.910409"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "0yt6i4"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "0yt6i4"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:02:49.923052"], ["updated_at", "2017-11-27 14:02:49.923052"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (1.4ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "2i7p54"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "2i7p54"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:02:49.939224"], ["updated_at", "2017-11-27 14:02:49.939224"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "zdv1en"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "zdv1en"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:02:49.961289"], ["updated_at", "2017-11-27 14:02:49.961289"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "znc4vo"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "znc4vo"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:02:49.974430"], ["updated_at", "2017-11-27 14:02:49.974430"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:07:08 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (44.4ms)
+Completed 200 OK in 562ms (Views: 514.3ms | ActiveRecord: 11.5ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (1.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "my0n9j"], ["LIMIT", 1]]
+  [1m[35mSQL (52.3ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "my0n9j"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:07:09.570961"], ["updated_at", "2017-11-27 14:07:09.570961"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/short_urls/55
+Completed 302 Found in 73ms (ActiveRecord: 56.3ms)
+Started GET "/short_urls/55" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"55"}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 55], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (7.3ms)
+Completed 200 OK in 83ms (Views: 75.4ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (5.8ms)
+Completed 200 OK in 29ms (Views: 26.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "ubi1d8"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "ubi1d8"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:07:09.766558"], ["updated_at", "2017-11-27 14:07:09.766558"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"http://github.com"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/short_urls/56
+Completed 302 Found in 4ms (ActiveRecord: 0.6ms)
+Started GET "/short_urls/56" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#show as HTML
+  Parameters: {"id"=>"56"}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."id" = $1 LIMIT $2[0m  [["id", 56], ["LIMIT", 1]]
+  Rendering short_urls/show.html.haml within layouts/application
+  Rendered short_urls/show.html.haml within layouts/application (9.9ms)
+Completed 200 OK in 39ms (Views: 34.8ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (6.6ms)
+Completed 200 OK in 33ms (Views: 31.3ms | ActiveRecord: 0.0ms)
+Started POST "/short_urls" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#create as HTML
+  Parameters: {"utf8"=>"✓", "short_url"=>{"original_url"=>"wrong url"}, "button"=>""}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://wrong url"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 10ms (ActiveRecord: 1.3ms)
+Started GET "/" for 127.0.0.1 at 2017-11-27 16:07:09 +0200
+Processing by ShortUrlsController#index as HTML
+  Rendering short_urls/index.html.haml within layouts/application
+  Rendered short_urls/index.html.haml within layouts/application (11.2ms)
+Completed 200 OK in 66ms (Views: 64.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "k9fnih"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "k9fnih"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:07:09.986400"], ["updated_at", "2017-11-27 14:07:09.986400"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "jylgh2"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "jylgh2"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:07:10.000750"], ["updated_at", "2017-11-27 14:07:10.000750"]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "vnjpeg"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "vnjpeg"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:07:10.017178"], ["updated_at", "2017-11-27 14:07:10.017178"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "ite8xz"], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "ite8xz"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:07:10.048866"], ["updated_at", "2017-11-27 14:07:10.048866"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "short_urls"[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."short_url" = $1 ORDER BY "short_urls"."id" DESC LIMIT $2[0m  [["short_url", "nt8rku"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "short_urls" ("original_url", "short_url", "sanitize_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["original_url", "http://github.com"], ["short_url", "nt8rku"], ["sanitize_url", "http://github.com"], ["created_at", "2017-11-27 14:07:10.066266"], ["updated_at", "2017-11-27 14:07:10.066266"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT  "short_urls".* FROM "short_urls" WHERE "short_urls"."sanitize_url" = $1 LIMIT $2[0m  [["sanitize_url", "http://github.com"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
